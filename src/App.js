@@ -1,8 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import io from 'socket.io-client';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      client: io.connect('http://localhost:3001'),
+      connectionStatus: 'disconnected',
+      gameId: null,
+      playerNum: 0,
+      gameState: null
+    }
+
+    this.state.client.on('waiting', () => {
+      this.setState({connectionStatus: 'waiting'});
+    });
+
+    this.state.client.on('game_start', (gameInfo) => {
+      this.setState({
+        connectionStatus: 'connected',
+        gameId: gameInfo.game_id,
+        playerNum: gameInfo.player_num,
+        gameState: gameInfo.game_state
+      });
+    });
+
+    this.joinGame = this.joinGame.bind(this);
+  }
+
+  joinGame() {
+    this.state.client.emit('new_game');
+  }
+
   render() {
     return (
       <div className="App">
@@ -24,5 +55,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
