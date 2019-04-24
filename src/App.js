@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
+
+import Game from './components/game';
+import Welcome from './components/welcome';
 import './App.css';
 
 export default class App extends Component {
@@ -27,30 +30,29 @@ export default class App extends Component {
       });
     });
 
-    this.joinGame = this.joinGame.bind(this);
+    this.router = this.router.bind(this);
   }
 
-  joinGame() {
-    this.state.client.emit('new_game');
+  router() {
+    if (this.state.connectionStatus === 'waiting') {
+      return (
+        <h1>Please wait while we search for a partner.</h1>
+      );
+    }
+    if (this.state.connectionStatus === 'connected') {
+      return (<Game id={this.state.gameId}
+                    socket={this.state.client}
+                    playerNum={this.state.playerNum}
+                    gameState={this.state.gameState}
+              />);
+    }
+    return (<Welcome socket={this.state.client}/>);
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.router()}
       </div>
     );
   }

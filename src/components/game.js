@@ -5,7 +5,18 @@ import Hand from './hand.js';
 
 
 export default class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
+      socket: this.props.socket,
+      id: this.props.id,
+      playerNum: this.props.playerNum,
+      gameState: this.props.gameState
+    }
 
+  }
+
+  render() {
+    return (<h2>WIP</h2>);
+  }
+}

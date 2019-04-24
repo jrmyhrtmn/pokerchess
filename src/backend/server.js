@@ -17,20 +17,20 @@ connection.once('open', () => {
   console.log("MongoDB connected.");
 });
 
-var queue = [];
+const queue = [];
 
 io.on("connection", (socket) => {
   console.log("New client connected: " + socket.id);
 
   socket.on("new_game", () => {
-    if (queue.length() == 0) {
+    if (queue.length == 0) {
       console.log("New game requested by " + socket.id);
       queue.push(socket.id);
       socket.emit("waiting");
     } else {
       const opponent = queue.pop();
       console.log("New game initiating between " + socket.id + " and " + opponent);
-      let game = util.initialiseGame(opponent, socket.id);
+      let game = new Game(util.initialiseGame(opponent, socket.id));
       game.save();
 
       io.to(opponent).emit("game_start", {
