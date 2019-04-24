@@ -24,6 +24,9 @@ export default class Game extends React.Component {
                  p2pos={this.state.gameState.p2_pos}
           />
         </div>
+        <div className="hand">
+          <Hand />
+        </div>
       </div>
     );
   }

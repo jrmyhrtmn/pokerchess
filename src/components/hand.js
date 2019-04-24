@@ -1,14 +1,14 @@
 import React from 'react';
 
-import '../index.css';
+import './components.css';
 import Card from './card.js';
 
 export default class Hand extends React.Component {
   renderCard(i) {
     return (
-      <Card piece   = {this.props.cards[i]}
-            onClick = {() => this.props.onClick(i)}
-      />
+      <Card /> //piece   = {this.props.cards[i]}
+      //onClick = {() => this.props.onClick(i)}
+      ///>
     );
   }
 
@@ -18,6 +18,6 @@ export default class Hand extends React.Component {
       hand.push(this.renderCard(i));
     }
 
-    return (<div className="hand">{hand}</div>);
+    return (<div>{hand}</div>);
   }
 }

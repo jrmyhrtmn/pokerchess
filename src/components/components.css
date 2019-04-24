@@ -25,6 +25,12 @@
   border-radius: 10px;
 }
 
+.game-board:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
 .square:focus {
   outline: none;
 }
@@ -35,7 +41,7 @@
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .b-sq {
@@ -44,4 +50,26 @@
 
 .w-sq {
   background-color: #ffffff;
+}
+
+.hand:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.hand {
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  border: 5px solid #000000;
+  border-radius: 5px;
+  float: left;
+  height: 98px;
+  width: 70px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
