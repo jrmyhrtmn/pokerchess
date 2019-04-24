@@ -1,21 +1,20 @@
 import React from 'react';
 
-import '../index.css';
+import './components.css';
 import Square from './square.js';
 
 export default class Board extends React.Component {
   renderSquare(i, color) {
     var player = 0;
-    if (this.props.p1pos == i) {
+    if (this.props.p1pos === i) {
       player = 1;
-    } else if (this.props.p2pos == i) {
+    } else if (this.props.p2pos === i) {
       player = 2;
     }
 
     return (
       <Square player = {player}
               color  = {color}
-              onClick={() => this.props.onClick(i)}
       />
     );
   }

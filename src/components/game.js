@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css';
+import './components.css';
 import Board from './board.js';
 import Hand from './hand.js';
 
@@ -17,6 +17,14 @@ export default class Game extends React.Component {
   }
 
   render() {
-    return (<h2>WIP</h2>);
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board p1pos={this.state.gameState.p1_pos}
+                 p2pos={this.state.gameState.p2_pos}
+          />
+        </div>
+      </div>
+    );
   }
 }
