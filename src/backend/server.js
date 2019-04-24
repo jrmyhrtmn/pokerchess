@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const mongoose = require('mongoose');
+const util = require('./util');
 const port = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
@@ -23,10 +24,13 @@ io.on("connection", (socket) => {
 
   socket.on("new_game", () => {
     if (queue.length() == 0) {
+      console.log("New game requested by " + socket.id);
       queue.push(socket.id);
+      socket.emit("waiting");
     } else {
       const opponent = queue.pop();
-      let game = initialiseGame(opponent, socket.id);
+      console.log("New game initiating between " + socket.id + " and " + opponent);
+      let game = util.initialiseGame(opponent, socket.id);
       game.save();
 
       io.to(opponent).emit("game_start", {
@@ -45,7 +49,7 @@ io.on("connection", (socket) => {
   socket.on("end_turn", (data) => {
     Game.findByIdAndUpdate(data.id, data.gameState);
     if (data.gameState.turnCount == 8) {
-      Game.findByIdAndUpdate(data.id, shuffle());
+      Game.findByIdAndUpdate(data.id, util.shuffle());
     }
     io.to(data.opponent).emit("start_turn", Game.findById(data.id, (err, game) => {
       return game.toObject();
@@ -61,6 +65,7 @@ io.on("connection", (socket) => {
   });
 });
 
-
-// TODO shuffle function
-// TODO add turn count to schema
+server.listen(port, (err) => {
+  if (err) throw err;
+  console.log('listening on port ' + port);
+});

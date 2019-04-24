@@ -8,7 +8,8 @@ let Game = new Schema() {
   p1_pos: Number,
   p2_pos: Number,
   p1_hand: [Number],
-  p2_hand: [Number]
+  p2_hand: [Number],
+  turn_count: Number
 }
 
 module.exports = mongoose.model('Game', Game);
