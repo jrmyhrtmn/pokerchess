@@ -47,21 +47,17 @@ io.on("connection", (socket) => {
   });
 
   socket.on("end_turn", (data) => {
-    Game.findByIdAndUpdate(data.id, data.gameState);
-    if (data.gameState.turnCount == 8) {
-      Game.findByIdAndUpdate(data.id, util.shuffle());
+    console.log("turn " + data.gameState.turn_count + " finished");
+    let gameState = data.gameState;
+    if (gameState.turn_count == 8) {
+      console.log("shuffling");
+      newHands = util.shuffle();
+      gameState.p1_hand = newHands.p1_hand;
+      gameState.p2_hand = newHands.p2_hand;
     }
-    io.to(data.opponent).emit("start_turn", Game.findById(data.id, (err, game) => {
-      return game.toObject();
-    }));
-  });
-
-  socket.on("victory", (data) => {
-    Game.findByIdAndDelete(data.id);
-    io.to(data.opponent).emit("game_over", {victory: false});
-    socket.emit("game_over", {victory: true});
-    io.to(data.opponent).disconnect();
-    socket.disconnect();
+    Game.findByIdAndUpdate(data.id, gameState);
+    io.to(data.opponent).emit("game_update", data.gameState);
+    socket.emit("game_update", data.gameState);
   });
 });
 

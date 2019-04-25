@@ -17,9 +17,9 @@ export default class Board extends React.Component {
     let onClick = null;
     let selectable = isSelectable(this.props.playerPos, this.props.opponentPos, this.props.selectedCard, i);
 
-    if (selectable) {
+    if (selectable && this.props.active) {
       shade = "selectable";
-      onClick = this.props.onClick;
+      onClick = () => {this.props.onMoveSelect(i)};
     }
 
     return (

@@ -3,7 +3,7 @@ import './components.css';
 
 export default function Square(props) {
   return (
-    <button className={"square " + props.color}>
+    <button className={"square " + props.color} onClick={props.onClick}>
       {props.player}
     </button>
   );
