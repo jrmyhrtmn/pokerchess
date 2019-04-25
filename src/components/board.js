@@ -2,23 +2,34 @@ import React from 'react';
 
 import './components.css';
 import Square from './square.js';
+import isSelectable from './logic.js';
 
 export default class Board extends React.Component {
   renderSquare(i, color) {
-    var player = 0;
-    if (this.props.p1pos === i) {
+    let shade = color;
+    let player = 0;
+    if (this.props.playerPos === i) {
       player = 1;
-    } else if (this.props.p2pos === i) {
+    } else if (this.props.opponentPos === i) {
       player = 2;
+    }
+
+    let onClick = null;
+    let selectable = isSelectable(this.props.playerPos, this.props.opponentPos, this.props.selectedCard, i);
+
+    if (selectable) {
+      shade = "selectable";
+      onClick = this.props.onClick;
     }
 
     return (
       <Square player = {player}
-              color  = {color}
+              color  = {shade}
+              onClick = {onClick}
       />
     );
   }
-
+        
   render() {
     const board = [];
     for (let i = 0; i < 6; i++) {

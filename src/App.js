@@ -40,6 +40,7 @@ export default class App extends Component {
       );
     }
     if (this.state.connectionStatus === 'connected') {
+      console.log(JSON.stringify(this.state.gameState));
       return (<Game id={this.state.gameId}
                     socket={this.state.client}
                     playerNum={this.state.playerNum}

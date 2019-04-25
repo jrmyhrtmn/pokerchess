@@ -42,6 +42,10 @@
 .game {
   display: flex;
   flex-direction: column;
+  background-color: #d3d3d3;
+  height: 100%;
+  width: 100%;
+  position: fixed;
 }
 
 .b-sq {
@@ -72,4 +76,8 @@
   width: 70px;
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.selectable {
+  background-color: #b00000;
 }

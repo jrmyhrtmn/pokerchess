@@ -6,9 +6,9 @@ import Card from './card.js';
 export default class Hand extends React.Component {
   renderCard(i) {
     return (
-      <Card /> //piece   = {this.props.cards[i]}
-      //onClick = {() => this.props.onClick(i)}
-      ///>
+      <Card  piece = {this.props.cards[i]}
+             onClick = {() => this.props.onClick(this.props.cards[i])}
+      />
     );
   }
 
