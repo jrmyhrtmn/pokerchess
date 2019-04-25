@@ -30,6 +30,15 @@ export default class App extends Component {
       });
     });
 
+    this.state.client.on('game_over', (victory) => {
+      this.setState({
+        connectionStatus: (victory) ? 'victory' : 'defeat',
+        gameId: null,
+        playerNum: 0,
+        gameState: null
+      });
+    });
+
     this.router = this.router.bind(this);
   }
 
@@ -39,6 +48,27 @@ export default class App extends Component {
         <h1>Please wait while we search for a partner.</h1>
       );
     }
+    if (this.state.connectionStatus === 'victory') {
+      return (
+        <div>
+          <h1>Congratulations! You Win!</h1>
+          <button onClick={() => this.setState({connectionStatus: 'disconnected'})}>
+            Return to Start
+          </button>
+        </div>
+      );
+    }
+    if (this.state.connectionStatus === 'defeat') {
+      return (
+        <div>
+          <h1>You Lose!</h1>
+          <button onClick={() => this.setState({connectionStatus: 'disconnected'})}>
+            Return to Start
+          </button>
+        </div>
+      );
+    }
+
     if (this.state.connectionStatus === 'connected') {
       console.log(JSON.stringify(this.state.gameState));
       return (<Game id={this.state.gameId}

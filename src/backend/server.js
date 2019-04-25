@@ -49,6 +49,14 @@ io.on("connection", (socket) => {
   socket.on("end_turn", (data) => {
     console.log("turn " + data.gameState.turn_count + " finished");
     let gameState = data.gameState;
+    if (gameState.p1_pos === gameState.p2_pos) {
+      console.log("game over");
+      Game.findByIdAndRemove(data.id);
+      io.to(data.opponent).emit("game_over", false);
+      socket.emit("game_over", true);
+      return;
+    }
+      
     if (gameState.turn_count == 8) {
       console.log("shuffling");
       newHands = util.shuffle();
