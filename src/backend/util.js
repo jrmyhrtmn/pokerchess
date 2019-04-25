@@ -1,16 +1,18 @@
 function shuffle() {
-  const deck = [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 5]
+  let deck = [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 5]
   const p1_hand = [];
   const p2_hand = [];
 
   for (let i = 0; i < 5; i++) {
-    let card1 = Math.random() * (12 - 2 * i);
-    p1_hand.push(deck[card1]);
-    delete deck[card1];
+    let idx1 = Math.floor(Math.random() * (13 - 2 * i));
+    let card1 = deck[idx1];
+    p1_hand.push(card1);
+    deck.splice(idx1, 1);
 
-    let card2 = Math.random() * (11 - 2 * i);
-    p2_hand.push(deck[card2]);
-    delete deck[card2];
+    let idx2 = Math.floor(Math.random() * (12 - 2 * i));
+    let card2 = deck[idx2];
+    p2_hand.push(card2);
+    deck.splice(idx2, 1);
   }
 
   return {p1_hand: p1_hand, p2_hand: p2_hand};

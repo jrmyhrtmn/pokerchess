@@ -23,7 +23,7 @@ export default class Board extends React.Component {
     }
 
     return (
-      <Square player = {player}
+      <Square player = {i}//{player}
               color  = {shade}
               onClick = {onClick}
       />
@@ -36,7 +36,7 @@ export default class Board extends React.Component {
       const row = [];
       for (let j = 0; j < 6; j++) {
         const clr = (i % 2 && j % 2) || (!(i % 2) && !(j % 2))? "w-sq" : "b-sq";
-        row.push(this.renderSquare((i * 8) + j, clr));
+        row.push(this.renderSquare((i * 6) + j, clr));
       }
       board.push(<div className="board-row">{row}</div>);
     }
