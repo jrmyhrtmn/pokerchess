@@ -79,5 +79,5 @@
 }
 
 .selectable {
-  background-color: #b00000;
+  border: 2px solid #b00000;
 }

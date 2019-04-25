@@ -23,8 +23,8 @@ export default class Board extends React.Component {
     }
 
     return (
-      <Square player = {i}//{player}
-              color  = {shade}
+      <Square player  = {player}
+              color   = {shade}
               onClick = {onClick}
       />
     );
