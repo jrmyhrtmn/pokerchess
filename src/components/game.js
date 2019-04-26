@@ -44,7 +44,7 @@ export default class Game extends React.Component {
   turnIndicator(active) {
     if (active)
       return (<h2>It is your turn</h2>);
-    return (<h2>Waiting on opponent's move</h2>);
+    return (<h2>Waiting on opponent's move...</h2>);
   }
 
   render() {

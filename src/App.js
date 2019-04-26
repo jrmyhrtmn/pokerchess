@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import Game from './components/game';
 import Welcome from './components/welcome';
 import './App.css';
+import './components/components.css';
 
 export default class App extends Component {
   constructor(props, context) {
@@ -45,14 +46,14 @@ export default class App extends Component {
   router() {
     if (this.state.connectionStatus === 'waiting') {
       return (
-        <h1>Please wait while we search for a partner.</h1>
+        <h1 className={'waiting'}>Searching for an opponent...</h1>
       );
     }
     if (this.state.connectionStatus === 'victory') {
       return (
         <div>
           <h1>Congratulations! You Win!</h1>
-          <button onClick={() => this.setState({connectionStatus: 'disconnected'})}>
+          <button className='nav-button' onClick={() => this.setState({connectionStatus: 'disconnected'})}>
             Return to Start
           </button>
         </div>
@@ -62,7 +63,7 @@ export default class App extends Component {
       return (
         <div>
           <h1>You Lose!</h1>
-          <button onClick={() => this.setState({connectionStatus: 'disconnected'})}>
+          <button className='nav-button' onClick={() => this.setState({connectionStatus: 'disconnected'})}>
             Return to Start
           </button>
         </div>
@@ -84,6 +85,7 @@ export default class App extends Component {
     return (
       <div className="App">
         {this.router()}
+        <h4 className="footer">Inspired by <a href='https://j4nw.itch.io/pawnbarian'>Pawnbarian</a>. Icons by <a href='https://game-icons.net'>Skoll</a> and <a href='http://lorcblog.blogspot.com'>Lorc</a> by <a href='https://creativecommons.org/licenses/by/3.0/'>CC BY 3.0</a></h4>
       </div>
     );
   }

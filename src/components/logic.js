@@ -68,6 +68,8 @@ export default function isSelectable(playerPos, opponentPos, pieceSelected, squa
       if ((displacement % 7 === 0) && ((playerCol - squareCol) * (playerRow - squareRow) > 0))
         return true;
       break;
+    default:
+      return false;
   }
 
   return false;

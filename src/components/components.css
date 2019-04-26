@@ -88,3 +88,23 @@
 .not-selected {
   border: 5px solid #000000;
 }
+
+.nav-button {
+  background: #b00000;
+  padding: 7px 14px;
+  border-radius: 18px;
+  color: white;
+  font-weight: bold;
+  vertical-align: middle;
+  border: 0px;
+}
+
+.nav-button:hover {
+  background: #0000b0;
+  color: #ccc;
+}
+
+.welcome-text {
+  padding: 0px 50px 10px 50px;
+  text-align: left;
+}
