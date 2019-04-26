@@ -10,8 +10,9 @@ import cardBack from '../icons/card-back.svg';
 
 export default function Card(props) {
   let pieces = [pawn, rook, bishop, knight, king, queen];
+  let style = props.selected ? "selected" : "not-selected";
   return (
-    <button className={"card"}
+    <button className={"card " + style}
             onClick={props.onClick}>
             <img src={(props.piece == -1) ? cardBack : pieces[props.piece]} />
     </button>

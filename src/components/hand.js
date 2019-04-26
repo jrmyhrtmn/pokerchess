@@ -8,6 +8,7 @@ export default class Hand extends React.Component {
     return (
       <Card  piece = {this.props.cards[i]}
              onClick = {() => this.props.onClick(i)}
+             selected = {this.props.selectedCard === i}
       />
     );
   }

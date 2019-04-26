@@ -69,7 +69,6 @@
 
 .card {
   background: #ffffff;
-  border: 5px solid #000000;
   border-radius: 5px;
   float: left;
   height: 98px;
@@ -80,4 +79,12 @@
 
 .selectable {
   border: 2px solid #b00000;
+}
+
+.selected {
+  border: 5px solid #b00000;
+}
+
+.not-selected {
+  border: 5px solid #000000;
 }

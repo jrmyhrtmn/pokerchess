@@ -41,6 +41,12 @@ export default class Game extends React.Component {
     this.setState({selectedCard: hand[choice], cardIndex: choice});
   }
 
+  turnIndicator(active) {
+    if (active)
+      return (<h2>It is your turn</h2>);
+    return (<h2>Waiting on opponent's move</h2>);
+  }
+
   render() {
     let playerPos = (this.state.playerNum === 1) ? this.state.gameState.p1_pos : this.state.gameState.p2_pos;
     let opponentPos = (this.state.playerNum === 1) ? this.state.gameState.p2_pos : this.state.gameState.p1_pos;
@@ -48,6 +54,7 @@ export default class Game extends React.Component {
     let active = (((this.state.playerNum + this.state.gameState.turn_count) % 2) ? true : false);
     return (
       <div className="game">
+        {this.turnIndicator(active)}
         <div className="game-board">
           <Board playerPos={playerPos}
                  opponentPos={opponentPos}
@@ -57,7 +64,7 @@ export default class Game extends React.Component {
           />
         </div>
         <div className="hand">
-          <Hand onClick={this.handleCardSelect} cards={hand} />
+          <Hand onClick={this.handleCardSelect} cards={hand} selectedCard={this.state.cardIndex} />
         </div>
       </div>
     );
